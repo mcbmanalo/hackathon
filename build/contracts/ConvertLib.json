@@ -1369,12 +1369,12 @@
     "1668270400819": {
       "events": {},
       "links": {},
-      "address": "0x016E874F2842C18F3Af46f0b01a6455b0Bd809C7",
-      "transactionHash": "0x83b9b21d05a8fffbb3f8558dbf9f002811c36b97365c983def8054cfd7bd71d2"
+      "address": "0x4514F7302dB4410E1D6FB0579fd1EbcB927F68b9",
+      "transactionHash": "0x617f32492359489cbe216dd1dcad6d6edbe049e32a3bb99c6d5b371e5802b8d9"
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-12T16:27:18.820Z",
+  "updatedAt": "2022-11-12T19:27:23.940Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
