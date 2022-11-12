@@ -9,13 +9,27 @@ import "./ConvertLib.sol";
 // coin/token contracts.
 
 contract FirmaCoin {
-    mapping(address => uint) balances;
-    mapping(address => uint) matchid;
+    uint public firmaLand;
 
+    mapping(address => uint) balances;
+    mapping(address => uint) cornSupply;
+    mapping(address => uint) tomatoSupply;
+    mapping(address => uint) eggplantSupply;
+
+    // This event is meant for the Transfer of coin
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    // This event is meant when a crop is purchased
+    event BuyCorn(address indexed _from, address indexed _to, uint amount);
+    event BuyTomato(address indexed _from, address indexed _to, uint amount);
+    event BuyEggplant(address indexed _from, address indexed _to, uint amount);
 
     constructor() {
         balances[tx.origin] = 10000;
+        cornSupply[tx.origin] = 0;
+        tomatoSupply[tx.origin] = 0;
+        eggplantSupply[tx.origin] = 0;
+        firmaLand = 9;
     }
 
     function sendCoin(address receiver, uint amount)
@@ -36,4 +50,10 @@ contract FirmaCoin {
     function getBalance(address addr) public view returns (uint) {
         return balances[addr];
     }
+
+    function getLand(address addr) public view returns (uint) {
+        return land;
+    }
+
+    function buyCorn(address addr, uint amount) returns (uint) {}
 }

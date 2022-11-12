@@ -1,0 +1,75 @@
+{
+  "contractName": "Economy",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Economy.sol\":\"Economy\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Economy.sol\":{\"keccak256\":\"0xe865df1fd2cdcbd7b38fc21bb8c329fedefc8b459cc2afb00072573df1b02e31\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://3e515bd867579c6bc8b63c6acd03e01778b372a7fc25f7b27f12d2e4e082188d\",\"dweb:/ipfs/Qmapz6PqenV7Fony95DYMLm5dZawinFZh2AVzmv2ksLYW5\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212204111e533e2a08c661334c2ab170229c014e8536c4f4323b016da8c996a34edc364736f6c634300080d0033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212204111e533e2a08c661334c2ab170229c014e8536c4f4323b016da8c996a34edc364736f6c634300080d0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "62:5334:1:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "62:5334:1:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: GPL-3.0\npragma solidity ^0.8.13;\n\ncontract Economy {\n    // // Parameters of the auction. Times are either\n    // // absolute unix timestamps (seconds since 1970-01-01)\n    // // or time periods in seconds.\n    // address[] payable public players;\n    // uint public auctionEndTime;\n    // // Current state of the auction.\n    // address public highestBidder;\n    // uint public highestBid;\n    // uint public wheatSupply;\n    // uint public tomatoSupply;\n    // uint public eggplantSupply;\n    // uint public wheatPrice;\n    // uint public tomatoPrice;\n    // uint public eggplantPrice;\n    // // Allowed withdrawals of previous bids\n    // mapping(address => uint) pendingReturns;\n    // // Set to true at the end, disallows any change.\n    // // By default initialized to `false`.\n    // bool ended;\n    // // Events that will be emitted on changes.\n    // event AuctionEnded(address winner, uint amount);\n    // // Errors that describe failures.\n    // // The triple-slash comments are so-called natspec\n    // // comments. They will be shown when the user\n    // // is asked to confirm a transaction or\n    // // when an error is displayed.\n    // /// The auction has already ended.\n    // error AuctionAlreadyEnded();\n    // /// There is already a higher or equal bid.\n    // error BidNotHighEnough(uint highestBid);\n    // /// The auction has not ended yet.\n    // error AuctionNotYetEnded();\n    // /// The function auctionEnd has already been called.\n    // error AuctionEndAlreadyCalled();\n    // /// Create a simple auction with `biddingTime`\n    // /// seconds bidding time on behalf of the\n    // /// beneficiary address `beneficiaryAddress`.\n    // constructor(uint biddingTime, address payable beneficiaryAddress) {\n    //     beneficiary = beneficiaryAddress;\n    //     auctionEndTime = block.timestamp + biddingTime;\n    // }\n    // /// Bid on the auction with the value sent\n    // /// together with this transaction.\n    // /// The value will only be refunded if the\n    // /// auction is not won.\n    // function bid() external payable {\n    //     // No arguments are necessary, all\n    //     // information is already part of\n    //     // the transaction. The keyword payable\n    //     // is required for the function to\n    //     // be able to receive Ether.\n    //     // Revert the call if the bidding\n    //     // period is over.\n    //     if (block.timestamp > auctionEndTime) revert AuctionAlreadyEnded();\n    //     // If the bid is not higher, send the\n    //     // money back (the revert statement\n    //     // will revert all changes in this\n    //     // function execution including\n    //     // it having received the money).\n    //     if (msg.value <= highestBid) revert BidNotHighEnough(highestBid);\n    //     if (highestBid != 0) {\n    //         // Sending back the money by simply using\n    //         // highestBidder.send(highestBid) is a security risk\n    //         // because it could execute an untrusted contract.\n    //         // It is always safer to let the recipients\n    //         // withdraw their money themselves.\n    //         pendingReturns[highestBidder] += highestBid;\n    //     }\n    //     highestBidder = msg.sender;\n    //     highestBid = msg.value;\n    // }\n    // /// Withdraw a bid that was overbid.\n    // function withdraw() external returns (bool) {\n    //     uint amount = pendingReturns[msg.sender];\n    //     if (amount > 0) {\n    //         // It is important to set this to zero because the recipient\n    //         // can call this function again as part of the receiving call\n    //         // before `send` returns.\n    //         pendingReturns[msg.sender] = 0;\n    //         // msg.sender is not of type `address payable` and must be\n    //         // explicitly converted using `payable(msg.sender)` in order\n    //         // use the member function `send()`.\n    //         if (!payable(msg.sender).send(amount)) {\n    //             // No need to call throw here, just reset the amount owing\n    //             pendingReturns[msg.sender] = amount;\n    //             return false;\n    //         }\n    //     }\n    //     return true;\n    // }\n    // /// End the auction and send the highest bid\n    // /// to the beneficiary.\n    // function auctionEnd() external {\n    //     // It is a good guideline to structure functions that interact\n    //     // with other contracts (i.e. they call functions or send Ether)\n    //     // into three phases:\n    //     // 1. checking conditions\n    //     // 2. performing actions (potentially changing conditions)\n    //     // 3. interacting with other contracts\n    //     // If these phases are mixed up, the other contract could call\n    //     // back into the current contract and modify the state or cause\n    //     // effects (ether payout) to be performed multiple times.\n    //     // If functions called internally include interaction with external\n    //     // contracts, they also have to be considered interaction with\n    //     // external contracts.\n    //     // 1. Conditions\n    //     if (block.timestamp < auctionEndTime) revert AuctionNotYetEnded();\n    //     if (ended) revert AuctionEndAlreadyCalled();\n    //     // 2. Effects\n    //     ended = true;\n    //     emit AuctionEnded(highestBidder, highestBid);\n    //     // 3. Interaction\n    //     beneficiary.transfer(highestBid);\n    // }\n}\n",
+  "sourcePath": "/home/mcbmanalo/hackathon/hackathon/contracts/Economy.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Economy.sol",
+    "exportedSymbols": {
+      "Economy": [
+        19
+      ]
+    },
+    "id": 20,
+    "license": "GPL-3.0",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 18,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "36:24:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Economy",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 19,
+        "linearizedBaseContracts": [
+          19
+        ],
+        "name": "Economy",
+        "nameLocation": "71:7:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 20,
+        "src": "62:5334:1",
+        "usedErrors": []
+      }
+    ],
+    "src": "36:5361:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-11-12T16:25:25.515Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
